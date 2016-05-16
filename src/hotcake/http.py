@@ -4,10 +4,12 @@ import base64
 from twisted.web import proxy, http
 
 # TODO: access log
-# TODO: CONNECT
+# TODO: support digest auth
+
+from .vender.twisted_connect_proxy.server import ConnectProxy
 
 
-class AuthorizedProxy(proxy.Proxy):
+class AuthorizedProxy(ConnectProxy):
     username = None
     password = None
 
