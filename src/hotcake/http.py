@@ -23,7 +23,10 @@ class AuthorizedProxy(ConnectProxy):
         if not self.authenticated():
             # XXX: should I do this on Request class?
             self.transport.write(
-                b'HTTP/1.1 407 Proxy Authentication Required\r\n\r\n')
+                b'HTTP/1.1 407 Proxy Authentication Required\r\n')
+            self.transport.write(
+                'Proxy-Authenticate: Basic realm="hotcake"\r\n')
+            self.transport.write('\r\n')
             self.transport.loseConnection()
             return
 
